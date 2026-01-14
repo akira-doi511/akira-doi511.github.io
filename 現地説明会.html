@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>テストページ　全国 遺跡・史跡 現地説明会案内</title>
+
+<style>
+body {
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  margin: 0;
+  background: #f5f5f5;
+  color: #333;
+}
+header {
+  background: #3a5f7d;
+  color: #fff;
+  padding: 30px 20px;
+  text-align: center;
+}
+section {
+  background: #fff;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 8px;
+}
+h2 {
+  border-left: 6px solid #3a5f7d;
+  padding-left: 10px;
+}
+button {
+  margin: 5px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background: #e0e0e0;
+  cursor: pointer;
+}
+button:hover {
+  background: #cfd8dc;
+}
+.map {
+  text-align: center;
+  padding: 20px;
+  border: 1px dashed #999;
+  background: #fafafa;
+}
+.event {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+footer {
+  background: #eee;
+  padding: 20px;
+  font-size: 14px;
+}
+</style>
+<style>
+body {
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  margin: 0;
+  background: #f5f5f5;
+  color: #333;
+}
+
+/* ここから追加 */
+#viewer-counter {
+  position: fixed;
+  top: 10px;
+  right: 15px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 14px;
+  z-index: 9999;
+}
+/* ここまで */
+
+header {
+  background: #3a5f7d;
+  color: #fff;
+  padding: 30px 20px;
+  text-align: center;
+}
+</style>
+
+</head>
+
+<body>
+ <div id="viewer-counter">
+  👁 閲覧数：<span id="count">0</span>
+ </div>
+
+
+<header>
+  <h1>テストページ 全国 遺跡・史跡<br>現地説明会 案内板</h1>
+  <p>
+    各地で行われる現地説明会・発掘現場公開を<br>
+    一か所で探せます。
+  </p>
+</header>
+
+<section>
+  <h2>日時で探す</h2>
+  <button onclick="filterByDate('today')">今日</button>
+  <button onclick="filterByDate('week')">今週</button>
+  <button onclick="filterByDate('month')">今月</button>
+  <button onclick="filterByDate('prevMonth')">◀ 前月</button>
+  <button onclick="filterByDate('nextMonth')">次月 ▶</button>
+  <button onclick="showAll()">すべて表示</button>
+</section>
+
+<section>
+  <h2>地域で探す</h2>
+  <div class="map">
+    <button onclick="filterByRegion('北海道')">北海道</button>
+    <button onclick="filterByRegion('東北')">東北</button>
+    <button onclick="filterByRegion('関東')">関東</button>
+    <button onclick="filterByRegion('中部')">中部</button>
+    <button onclick="filterByRegion('近畿')">近畿</button>
+    <button onclick="filterByRegion('中国')">中国</button>
+    <button onclick="filterByRegion('四国')">四国</button>
+    <button onclick="filterByRegion('九州')">九州</button>
+  </div>
+</section>
+
+<section>
+  <h2>直近の現地説明会（参考掲載）</h2>
+
+  <div class="event" data-date="2026-1-17" data-region="近畿">
+    <strong>2026年1月17日（土）</strong><br>
+    伊勢市うるし原遺跡（弥生～鎌倉）／三重県<br>
+    主催：三重県埋蔵文化財センター
+  </div>
+
+  <div class="event" data-date="2026-1-10" data-region="近畿">
+    <strong>2026年1月10日（土）</strong><br>
+    丹波市柏原藩陣屋跡（江戸）／兵庫県<br>
+    主催：兵庫県教育委員会
+  </div>
+
+  <div class="event" data-date="2025-12-20" data-region="近畿">
+    <strong>2025年12月20日（土）</strong><br>
+    峯ケ塚古墳（古墳）／大阪府<br>
+    主催：大阪府羽曳野市教育委員会
+  </div>
+
+ <div class="event" data-date="2025-12-20" data-region="近畿">
+    <strong>2025年12月20日（土）</strong><br>
+    京丹後市三分井根遺跡第4次（奈良）／京都府<br>
+    主催：公益財団法人京都府埋蔵文化財調査研究センター
+  </div>
+
+  <div class="event" data-date="2025-12-13" data-region="近畿">
+    <strong>2025年12月13日（土）</strong><br>
+    舞鶴市田辺城跡第34次（安土桃山～江戸）／京都府<br>
+    主催：公益財団法人京都府埋蔵文化財調査研究センター
+  </div>
+
+  <div class="event" data-date="2025-12-06" data-region="近畿">
+    <strong>2025年12月6日（土）</strong><br>
+    出屋敷北十三遺跡（弥生～古墳）／奈良県<br>
+    主催：奈良県立橿原考古学研究所
+  </div>
+  
+  <div class="event" data-date="2025-11-15" data-region="中部">
+    <strong>2025年11月15日（土）</strong><br>
+    南魚沼市六日町藤塚遺跡（古墳～平安）／新潟県<br>
+    主催：新潟県埋蔵文化財調査事業団
+  </div>
+
+  <div class="event"
+     data-start="2025-11-08"
+     data-end="2025-11-09"
+     data-region="近畿">    
+    <strong>2025年11月8日（土）～9日（日）</strong><br>
+    史跡 飛鳥宮跡（飛鳥時代）／奈良県<br>
+    主催：奈良県立橿原考古学研究所
+  </div>
+
+  <div class="event" data-date="2025-11-08" data-region="近畿">
+    <strong>2025年11月8日（土）</strong><br>
+    枚方市茄子作遺跡（古墳）／大阪府<br>
+    主催：公益財団法人大阪府文化財センター
+  </div>
+
+  <div class="event" data-date="2025-11-08" data-region="東北">
+    <strong>2025年11月8日（土）</strong><br>
+    花巻市山ノ神Ⅱ遺跡（縄文）／岩手県<br>
+    主催：公益財団法人岩手県文化振興事業団埋蔵文化財センター
+  </div>
+  
+  <div class="event"
+     data-start="2025-11-08"
+     data-end="2025-11-08"
+     data-region="中部">    
+    <strong>2025年11月8日（土）</strong><br>
+    柏崎市近江遺跡（奈良～安土桃山）／新潟県<br>
+    主催：新潟県埋蔵文化財調査事業団
+  </div>
+
+  <div class="event" data-date="2025-10-05" data-region="近畿">
+    <strong>2025年10月5日（日）</strong><br>
+    笠原南遺跡（奈良～古墳）／滋賀県<br>
+    主催：公益財団法人滋賀県文化財保護協会
+  </div>
+
+  <p style="font-size:14px;color:#666;">
+    ※本ページはテスト表示です。実際の開催情報ではありません。
+  </p>
+</section>
+
+<footer>
+  <h3>主催者の皆さまへ</h3>
+  <p>
+    教育委員会・博物館・保存会などが実施する<br>
+    現地説明会案内を掲載できます。
+  </p>
+</footer>
+
+
+<script>
+function getEventRange(event) {
+  if (event.dataset.start && event.dataset.end) {
+    return {
+      start: new Date(event.dataset.start),
+      end: new Date(event.dataset.end)
+    };
+  }
+  if (event.dataset.date) {
+    const d = new Date(event.dataset.date);
+    return { start: d, end: d };
+  }
+  return null;
+}
+
+function filterByDate(type) {
+  const today = new Date();
+  const events = document.querySelectorAll('.event');
+
+  const thisYear = today.getFullYear();
+  const thisMonth = today.getMonth();
+
+  let startRange, endRange;
+
+  if (type === 'today') {
+    startRange = new Date(thisYear, thisMonth, today.getDate());
+    endRange   = new Date(thisYear, thisMonth, today.getDate());
+  }
+
+  if (type === 'week') {
+    startRange = today;
+    endRange   = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
+  }
+
+  if (type === 'month') {
+    startRange = new Date(thisYear, thisMonth, 1);
+    endRange   = new Date(thisYear, thisMonth + 1, 0);
+  }
+
+  if (type === 'prevMonth') {
+    startRange = new Date(thisYear, thisMonth - 1, 1);
+    endRange   = new Date(thisYear, thisMonth, 0);
+  }
+
+  if (type === 'nextMonth') {
+    startRange = new Date(thisYear, thisMonth + 1, 1);
+    endRange   = new Date(thisYear, thisMonth + 2, 0);
+  }
+
+  events.forEach(event => {
+    const range = getEventRange(event);
+    if (!range) {
+      event.style.display = 'none';
+      return;
+    }
+
+    const show =
+      range.end >= startRange &&
+      range.start <= endRange;
+
+    event.style.display = show ? 'block' : 'none';
+  });
+}
+
+function filterByRegion(region) {
+  const events = document.querySelectorAll('.event');
+  events.forEach(event => {
+    event.style.display =
+      event.dataset.region === region ? 'block' : 'none';
+  });
+}
+
+function showAll() {
+  document.querySelectorAll('.event').forEach(event => {
+    event.style.display = 'block';
+  });
+}
+</script>
