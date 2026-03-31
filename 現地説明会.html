@@ -95,6 +95,23 @@ header {
 
 </head>
 
+<script>
+  // ページごとに別カウントにするため、URLパスをキーにする
+  const key = location.pathname + "_views";
+
+  // これまでのカウントを取得（なければ 0）
+  let count = Number(localStorage.getItem(key) || 0);
+
+  // 1 増やす
+  count++;
+
+  // 保存
+  localStorage.setItem(key, count);
+
+  // 画面に表示
+  document.getElementById("count").textContent = count;
+</script>
+  
 <body>
   <div id="viewer-counter">
   👁 閲覧数：<span id="count">0</span>
