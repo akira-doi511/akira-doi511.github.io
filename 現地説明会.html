@@ -94,8 +94,13 @@ header {
 </style>
 
 </head>
+  
+<body>
+  <div id="viewer-counter">
+  👁 閲覧数：<span id="count">0</span>
+ </div>
 
-<script>
+ <script>
   // ページごとに別カウントにするため、URLパスをキーにする
   const key = location.pathname + "_views";
 
@@ -111,11 +116,6 @@ header {
   // 画面に表示
   document.getElementById("count").textContent = count;
 </script>
-  
-<body>
-  <div id="viewer-counter">
-  👁 閲覧数：<span id="count">0</span>
- </div>
 
 <header>
   <h1>テストページ 全国 遺跡・史跡<br>現地説明会 案内板</h1>
