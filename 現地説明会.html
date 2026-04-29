@@ -3,6 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <title>全国 遺跡・史跡 現地説明会案内</title>
+<style>
+/* 直近の現地説明会の白背景ブロック */
+.recent-events {
+    background-color: #ffffff;
+    padding: 12px 18px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* タイトルを少し右へ */
+.recent-events h2 {
+    margin-left: 5px;
+}
+
+/* イベント内容 (.event) を右へずらす */
+.recent-events .event {
+    padding-left: 10px;
+}
+</style>
+
 <meta name="description" content="考古学・歴史に関する現地説明会の開催情報をまとめています。">
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WSEZH1ERS7"></script>
@@ -152,7 +173,12 @@ header {
 </section
 
 <section>
-   <h2>直近の現地説明会（参考掲載）</h2>
+  <div class="recent-events">
+  <h2>直近の現地説明会</h2>
+  <div id="eventList">
+      <!-- イベント一覧（.event）がここに入る） -->
+  </div>
+</div> <!-- ← ここで recent-events を閉じる -->
 
      <div class="event" data-date="2026-5-2" data-region="関東">
       <strong>2026年5月10日（日）午前10時00分　から  15時00分 まで　</strong><br>
