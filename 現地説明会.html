@@ -448,9 +448,10 @@ function filterByDate(type) {
   }
 
   if (type === 'nextMonth') {
-    startRange = new Date(thisYear, thisMonth + 1, 1);
-    endRange   = new Date(thisYear, thisMonth + 2, 0);
-  }
+    const nextMonth = new Date(thisYear, thisMonth + 1, 1);
+    startRange = new Date(nextMonth.getFullYear(), nextMonth.getMonth(), 1);
+    endRange   = new Date(nextMonth.getFullYear(), nextMonth.getMonth() + 1, 0);
+}
 
   events.forEach(event => {
     const range = getEventRange(event);
