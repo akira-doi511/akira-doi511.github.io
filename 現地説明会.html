@@ -468,17 +468,21 @@ header {
   </p>
 </footer>
 
-
 <script>
+function parseLocalDate(dateString) {
+  const [y, m, d] = dateString.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+
 function getEventRange(event) {
   if (event.dataset.start && event.dataset.end) {
     return {
-      start: new Date(event.dataset.start),
-      end: new Date(event.dataset.end)
+      start: parseLocalDate(event.dataset.start),
+      end: parseLocalDate(event.dataset.end)
     };
   }
   if (event.dataset.date) {
-    const d = new Date(event.dataset.date);
+    const d = parseLocalDate(event.dataset.date);
     return { start: d, end: d };
   }
   return null;
@@ -493,32 +497,39 @@ function filterByDate(type) {
 
   let startRange, endRange;
 
+  // 今日
   if (type === 'today') {
     startRange = new Date(thisYear, thisMonth, today.getDate());
     endRange   = new Date(thisYear, thisMonth, today.getDate());
   }
 
+  // 今週（日曜〜土曜）
   if (type === 'week') {
-    startRange = today;
-    endRange   = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
+    const day = today.getDay(); // 0=日曜, 6=土曜
+    startRange = new Date(thisYear, thisMonth, today.getDate() - day);
+    endRange   = new Date(thisYear, thisMonth, today.getDate() - day + 6);
   }
 
+  // 今月
   if (type === 'month') {
     startRange = new Date(thisYear, thisMonth, 1);
     endRange   = new Date(thisYear, thisMonth + 1, 0);
   }
 
+  // 前月
   if (type === 'prevMonth') {
     startRange = new Date(thisYear, thisMonth - 1, 1);
     endRange   = new Date(thisYear, thisMonth, 0);
   }
 
+  // 来月
   if (type === 'nextMonth') {
     const nextMonth = new Date(thisYear, thisMonth + 1, 1);
     startRange = new Date(nextMonth.getFullYear(), nextMonth.getMonth(), 1);
     endRange   = new Date(nextMonth.getFullYear(), nextMonth.getMonth() + 1, 0);
-}
+  }
 
+  // 表示・非表示の判定
   events.forEach(event => {
     const range = getEventRange(event);
     if (!range) {
